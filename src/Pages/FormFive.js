@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from "@mui/material/Button";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { Typography } from "@mui/material";
 import Checkboxvalidator from "./Checkboxvalidator";
+
 const defaultState={
     user: {
         username: "",
@@ -11,22 +12,30 @@ const defaultState={
         email: "",
       },
       checkstatus: {
-        check: false,
+        check: true,
       },
-
-
 }
 
 const FormFive = () => {
-    const state={
-        ...defaultState
-    }
-    
+ 
     var[formValue,setFormValue]=useState(defaultState)
-console.log(formValue)
+    // console.log(formValue)
+
+//validation rules addition
+ValidatorForm.addValidationRule("isPasswordMatch", (value) => {
+    // console.log('pppppp')
+    if (value !== formValue.user.password) {
+      return false;
+    }
+    return true;
+  });
 
 
-function handleSubmit(error){
+
+
+
+
+function handleSubmit(){
     console.log('submit clicked')
     console.log(formValue)
     
@@ -36,68 +45,74 @@ function handleEmailChange(){
     setFormValue({
         ...formValue,
             user:{
+                ...formValue.user,
                 email:document.getElementById('email').value
             }
         }
     )
+    console.log(formValue)
 }
-function handlePasswordChange(event){
+
+function handlePasswordChange(){
     console.log('password changed')
     setFormValue({
         ...formValue,
         user:{
+            ...formValue.user,
             password:document.getElementById('password').value
         }
     })
+    console.log(formValue)
 }
 
-function handleNameChange(event){
-    console.log('name changed')
+function handleNameChange(){
 
     setFormValue(
             {
                 ...formValue,
                 user:{
+                    ...formValue.user,
                     username: document.getElementById('username').value,
-                    ...formValue
+                    
 
                 }
             }
         )
-        console.log(formValue)
-
-    // const {user}=state
-    // setFormValue({...state,
-    // user:{
-    //     ...state.user,
-    //     [event.target.name]:event.target.value
-    // }})
+       console.log(formValue)
 }
 function handleRepeatChange(){
-    console.log('repeat password changed')
+    console.log('repeat password status changed')
     setFormValue({
         ...formValue,
         user:{
+            ...formValue.user,
             repeatPassword:document.getElementById('repeatpass').value
         }
     })
+    console.log(formValue)
 }
 function clearform(){
     console.log('form cleared')
     setFormValue({
         ...defaultState
+        
     })
-    ValidatorForm.reset()
+    console.log(formValue)
+
 }
+
 function checkboxcheck(){
     console.log('checkbox toggle clicked')
+    
     setFormValue({
         ...formValue,
         checkstatus:{
-            check: !document.getElementById('checker').value
+            check:!formValue.checkstatus.check
         }
     })
+   
 }
+console.log(formValue.checkstatus.check)
 
   return (
     <ValidatorForm onSubmit={handleSubmit} onError={(error)=>{
@@ -122,7 +137,7 @@ function checkboxcheck(){
       id='email'
       validators={["required", "isEmail"]}
       errorMessages={["This field is required", "email is not valid"]}
-      value={defaultState.user.email}
+      value={formValue.user.email}
     />
     <TextValidator
       label="Password"
@@ -132,7 +147,7 @@ function checkboxcheck(){
       type="password"
       validators={["required"]}
       errorMessages={["this field is required"]}
-      value={defaultState.user.password}
+      value={formValue.user.password}
     />
     <TextValidator
       label="Repeat password"
@@ -140,19 +155,20 @@ function checkboxcheck(){
       name="repeatPassword"
       id='repeatpass'
       type="password"
-      validators={[ "required"]}
-      errorMessages={["this field is required" ]}
-      value={defaultState.user.repeatPassword}
+      validators={[ "required",'isPasswordMatch']}
+      errorMessages={["this field is required",'password mismatch' ]}
+      value={formValue.user.repeatPassword}
     />
     <Checkboxvalidator
           id="checker"
           label="I accept the terms & conditions"
           validators={["required"]}
           errorMessages={["this field is required"]}
-          checked={state.checkstatus.check}
-          value={state.checkstatus.check}
+          checked={formValue.checkstatus.check}
+          value={formValue.checkstatus.check}
           onChange={checkboxcheck}
         />
+        
 
     <Button  type="submit" variant='contained' color='success'>Submit</Button>
     <Button  type="button" onClick={clearform} variant='contained' color='warning'>Clear</Button>

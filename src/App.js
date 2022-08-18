@@ -1,6 +1,7 @@
-
+import React from 'react';
 import './App.css';
-import FormFive from './Pages/FormFive';
+import MyRoutes from './MyRoutes';
+
 
 
 
@@ -9,9 +10,7 @@ import FormFive from './Pages/FormFive';
 
 function App() {
   return (
-    <div className="App">
-    <FormFive/>
-    </div>
+  <MyRoutes/>
   );
 }
 
