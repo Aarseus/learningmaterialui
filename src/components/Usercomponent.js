@@ -8,7 +8,7 @@ const Usercomponent = () => {
     const myUsers=useSelector((state)=>state.userManipulation)
     // const value=[...myUsers.userlist]
     console.log(myUsers)
-      //delete users
+      //delete usersr
   // function handleDelete(newdelete) {
   //   console.log(data);
   //   console.log("and");
