@@ -1,7 +1,7 @@
 import React from 'react'
-import Footer from '../maincomponents/Footer'
-import Navbar from '../maincomponents/Navbar'
-import Notes from '../maincomponents/Notes'
+import Footer from '../components/Footer'
+import Navbar from '../components/Navbar'
+import Notes from '../components/Notes'
 
 const Notepad = () => {
   return (

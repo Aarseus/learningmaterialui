@@ -4,11 +4,15 @@ import AddIcon from "@mui/icons-material/Add";
 import React from "react";
 import { useSelector,useDispatch } from "react-redux";
 import {incNumber,decNumber} from '../redux/actions/index'
-const Counter = () => {
+
+const CounterComponent= () => {
   const myState=useSelector((state)=>state.changeTheNumber)
   const dispatch=useDispatch()
   return (
-    <div div style={{margin:'80px'}}>
+    <>
+   
+    
+    <div style={{marginTop:'100px',height:'80vh'}}>
    
       <Typography variant="h2" align="center">
         Increment/Decrement counter 
@@ -43,7 +47,9 @@ const Counter = () => {
         </CardContent>
       </Card>
     </div>
+
+    </>
   );
 };
 
-export default Counter;
+export default CounterComponent;

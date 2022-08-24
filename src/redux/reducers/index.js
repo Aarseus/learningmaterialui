@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import changeTheNumber from "./upDownCounter";
-import manageUser from "./userList";
-
+import userManipulation from './UsersTable'
+import calculation from './calculatorreducer'
 const rootReducer=combineReducers({
     changeTheNumber,
-    manageUser
+    userManipulation,calculation
 
 
 })
